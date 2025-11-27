@@ -1,0 +1,68 @@
+{
+  "Course": {
+    "table": "course",
+    "alias": "c",
+    "fields": [
+      { "name": "courseId", "dbColumn": "course_id" },
+      { "name": "courseName", "dbColumn": "course_name" },
+      { "name": "title", "dbColumn": "title" }
+    ],
+    "joins": [
+      {
+        "target": "Price",
+        "localColumn": "course_id",
+        "foreignColumn": "course_id"
+      }
+    ]
+  },
+
+  "Student": {
+    "table": "student",
+    "alias": "s",
+    "fields": [
+      { "name": "studentId", "dbColumn": "student_id" },
+      { "name": "name", "dbColumn": "name" },
+      { "name": "dob", "dbColumn": "dob" },
+      { "name": "qualification", "dbColumn": "qualification" }
+    ]
+  },
+
+  "Enrollment": {
+    "table": "enrollment",
+    "alias": "e",
+    "fields": [
+      { "name": "enrollmentId", "dbColumn": "enrollment_id" },
+      { "name": "student", "dbColumn": "student_id" },
+      { "name": "course", "dbColumn": "course_id" }
+    ],
+    "joins": [
+      {
+        "target": "Student",
+        "localColumn": "student_id",
+        "foreignColumn": "student_id"
+      },
+      {
+        "target": "Course",
+        "localColumn": "course_id",
+        "foreignColumn": "course_id"
+      }
+    ]
+  },
+
+  "Price": {
+    "table": "price",
+    "alias": "p",
+    "fields": [
+      { "name": "priceId", "dbColumn": "price_id" },
+      { "name": "amount", "dbColumn": "amount" },
+      { "name": "course", "dbColumn": "course_id" }
+    ],
+    "joins": [
+      {
+        "target": "Course",
+        "localColumn": "course_id",
+        "foreignColumn": "course_id"
+      }
+    ]
+  }
+}

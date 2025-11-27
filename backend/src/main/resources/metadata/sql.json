@@ -1,0 +1,82 @@
+{
+  "database": "student_management",
+  "tables": [
+    {
+      "name": "student",
+      "primaryKey": "student_id",
+      "columns": [
+        {
+          "name": "student_id",
+          "type": "UUID",
+          "constraints": ["PRIMARY KEY"]
+        },
+        { "name": "name", "type": "VARCHAR(255)", "constraints": ["NOT NULL"] },
+        { "name": "dob", "type": "DATE" },
+        { "name": "qualification", "type": "VARCHAR(255)" }
+      ]
+    },
+    {
+      "name": "course",
+      "primaryKey": "course_id",
+      "columns": [
+        { "name": "course_id", "type": "UUID", "constraints": ["PRIMARY KEY"] },
+        {
+          "name": "course_name",
+          "type": "VARCHAR(255)",
+          "constraints": ["NOT NULL"]
+        },
+        { "name": "title", "type": "VARCHAR(255)" }
+      ]
+    },
+    {
+      "name": "enrollment",
+      "primaryKey": "enrollment_id",
+      "columns": [
+        {
+          "name": "enrollment_id",
+          "type": "UUID",
+          "constraints": ["PRIMARY KEY"]
+        },
+        { "name": "student_id", "type": "UUID", "constraints": ["NOT NULL"] },
+        { "name": "course_id", "type": "UUID", "constraints": ["NOT NULL"] }
+      ],
+      "foreignKeys": [
+        {
+          "column": "student_id",
+          "references": {
+            "table": "student",
+            "column": "student_id"
+          },
+          "name": "fk_student"
+        },
+        {
+          "column": "course_id",
+          "references": {
+            "table": "course",
+            "column": "course_id"
+          },
+          "name": "fk_course"
+        }
+      ]
+    },
+    {
+      "name": "price",
+      "primaryKey": "price_id",
+      "columns": [
+        { "name": "price_id", "type": "UUID", "constraints": ["PRIMARY KEY"] },
+        { "name": "amount", "type": "NUMERIC(10,2)" },
+        { "name": "course_id", "type": "UUID", "constraints": ["UNIQUE"] }
+      ],
+      "foreignKeys": [
+        {
+          "column": "course_id",
+          "references": {
+            "table": "course",
+            "column": "course_id"
+          },
+          "name": "fk_price_course"
+        }
+      ]
+    }
+  ]
+}

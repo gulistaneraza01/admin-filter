@@ -1,0 +1,42 @@
+{
+  "entity": "student",
+  "table": "students",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Long",
+      "label": "ID",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    {
+      "name": "name",
+      "type": "String",
+      "label": "Student Name",
+      "required": true,
+      "maxLength": 100,
+      "validation": {
+        "pattern": "^[A-Za-z\\s]+$",
+        "message": "Name must contain only letters and spaces"
+      }
+    },
+    {
+      "name": "dob",
+      "type": "LocalDate",
+      "label": "Date of Birth",
+      "required": true,
+      "validation": {
+        "minDate": "1950-01-01",
+        "maxDate": "2015-12-31"
+      }
+    }
+  ],
+  "listView": ["id", "name", "dob"],
+  "relationships": [
+    {
+      "type": "oneToMany",
+      "target": "enroll",
+      "field": "enrollments"
+    }
+  ]
+}

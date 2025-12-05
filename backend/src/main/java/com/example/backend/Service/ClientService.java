@@ -1,12 +1,9 @@
 package com.example.backend.Service;
 
-import java.util.List;
-
 import com.example.backend.DTO.CourseRequest;
 import com.example.backend.DTO.EnrollmentRequest;
 import com.example.backend.DTO.PriceRequest;
 import com.example.backend.DTO.StudentRequest;
-import com.example.backend.Model.DatabaseSchema;
 
 public interface ClientService {
 
@@ -18,5 +15,4 @@ public interface ClientService {
 
     String addEnrollment(EnrollmentRequest enrollmentRequest);
 
-    List<String> convertJsonToSql(DatabaseSchema schema);
 }

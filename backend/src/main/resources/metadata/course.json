@@ -1,0 +1,41 @@
+{
+  "entity": "course",
+  "table": "courses",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Long",
+      "label": "ID",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    {
+      "name": "name",
+      "type": "String",
+      "label": "Course Code",
+      "required": true,
+      "maxLength": 50,
+      "unique": true
+    },
+    {
+      "name": "title",
+      "type": "String",
+      "label": "Course Title",
+      "required": true,
+      "maxLength": 200
+    }
+  ],
+  "listView": ["id", "name", "title"],
+  "relationships": [
+    {
+      "type": "oneToMany",
+      "target": "price",
+      "field": "prices"
+    },
+    {
+      "type": "oneToMany",
+      "target": "enroll",
+      "field": "enrollments"
+    }
+  ]
+}

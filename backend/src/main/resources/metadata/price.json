@@ -1,0 +1,42 @@
+{
+  "entity": "price",
+  "table": "prices",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Long",
+      "label": "ID",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    {
+      "name": "amount",
+      "type": "BigDecimal",
+      "label": "Fee Amount",
+      "required": true,
+      "validation": {
+        "min": 0,
+        "max": 100000
+      }
+    },
+    {
+      "name": "courseId",
+      "type": "Long",
+      "label": "Course ID",
+      "required": true,
+      "foreignKey": {
+        "table": "course",
+        "field": "id"
+      }
+    }
+  ],
+  "listView": ["id", "amount", "courseId"],
+  "relationships": [
+    {
+      "type": "manyToOne",
+      "target": "course",
+      "field": "course",
+      "joinColumn": "courseId"
+    }
+  ]
+}

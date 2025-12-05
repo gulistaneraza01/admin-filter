@@ -1,0 +1,40 @@
+{
+  "entities": ["student", "course", "price", "enroll"],
+  "relationships": [
+    {
+      "from": "student",
+      "to": "enroll",
+      "via": "students.id = enrollments.student_id",
+      "type": "oneToMany"
+    },
+    {
+      "from": "enroll",
+      "to": "course",
+      "via": "enrollments.course_id = courses.id",
+      "type": "manyToOne"
+    },
+    {
+      "from": "course",
+      "to": "price",
+      "via": "courses.id = prices.course_id",
+      "type": "oneToMany"
+    }
+  ],
+  "availableFields": {
+    "student": [
+      { "name": "id", "label": "Student ID", "type": "Long" },
+      { "name": "name", "label": "Student Name", "type": "String" },
+      { "name": "dob", "label": "Date of Birth", "type": "LocalDate" }
+    ],
+    "course": [
+      { "name": "id", "label": "Course ID", "type": "Long" },
+      { "name": "name", "label": "Course Code", "type": "String" },
+      { "name": "title", "label": "Course Title", "type": "String" }
+    ],
+    "price": [
+      { "name": "id", "label": "Price ID", "type": "Long" },
+      { "name": "amount", "label": "Fee Amount", "type": "BigDecimal" }
+    ],
+    "enroll": [{ "name": "id", "label": "Enrollment ID", "type": "Long" }]
+  }
+}

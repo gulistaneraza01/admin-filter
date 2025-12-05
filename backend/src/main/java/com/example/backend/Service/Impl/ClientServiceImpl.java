@@ -1,22 +1,19 @@
 package com.example.backend.Service.Impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 
 import com.example.backend.DTO.CourseRequest;
 import com.example.backend.DTO.EnrollmentRequest;
 import com.example.backend.DTO.PriceRequest;
 import com.example.backend.DTO.StudentRequest;
-import com.example.backend.Model.Column;
+
 import com.example.backend.Model.Course;
-import com.example.backend.Model.DatabaseSchema;
+
 import com.example.backend.Model.Enrollment;
-import com.example.backend.Model.ForeignKey;
+
 import com.example.backend.Model.Price;
 import com.example.backend.Model.Student;
-import com.example.backend.Model.Table;
+
 import com.example.backend.Repository.CourseRepository;
 import com.example.backend.Repository.EnrollmentRepository;
 import com.example.backend.Repository.PriceRepository;
@@ -89,58 +86,6 @@ public class ClientServiceImpl implements ClientService {
 
         Enrollment savedEnrollment = enrollmentRepository.save(enrollment);
         return "Enrollment added successfully with ID: " + savedEnrollment.getEnrollmentId();
-    }
-
-    @Override
-    public List<String> convertJsonToSql(DatabaseSchema schema) {
-        List<String> queries = new ArrayList<>();
-
-        for (Table table : schema.getTables()) {
-
-            StringBuilder sql = new StringBuilder("CREATE TABLE IF NOT EXISTS ");
-            sql.append(table.getName()).append(" (");
-
-            for (Column column : table.getColumns()) {
-                sql.append(column.getName())
-                        .append(" ")
-                        .append(column.getType());
-
-                if (column.getConstraints() != null) {
-                    for (String c : column.getConstraints()) {
-                        sql.append(" ").append(c);
-                    }
-                }
-                sql.append(", ");
-            }
-
-            if (table.getForeignKeys() != null) {
-                for (ForeignKey fk : table.getForeignKeys()) {
-                    sql.append("CONSTRAINT ")
-                            .append(fk.getName())
-                            .append(" FOREIGN KEY (")
-                            .append(fk.getColumn())
-                            .append(") REFERENCES ")
-                            .append(fk.getReferences().getTable())
-                            .append("(")
-                            .append(fk.getReferences().getColumn())
-                            .append("), ");
-                }
-            }
-
-            int len = sql.length();
-            sql.delete(len - 2, len);
-
-            sql.append(");");
-
-            String cleanSql = sql.toString()
-                    .replace("\n", "")
-                    .replace("\r", "")
-                    .trim();
-
-            queries.add(cleanSql);
-        }
-
-        return queries;
     }
 
 }

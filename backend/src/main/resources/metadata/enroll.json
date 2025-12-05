@@ -1,0 +1,48 @@
+{
+  "entity": "enroll",
+  "table": "enrollments",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Long",
+      "label": "ID",
+      "primaryKey": true,
+      "autoIncrement": true
+    },
+    {
+      "name": "studentId",
+      "type": "Long",
+      "label": "Student ID",
+      "required": true,
+      "foreignKey": {
+        "table": "student",
+        "field": "id"
+      }
+    },
+    {
+      "name": "courseId",
+      "type": "Long",
+      "label": "Course ID",
+      "required": true,
+      "foreignKey": {
+        "table": "course",
+        "field": "id"
+      }
+    }
+  ],
+  "listView": ["id", "studentId", "courseId"],
+  "relationships": [
+    {
+      "type": "manyToOne",
+      "target": "student",
+      "field": "student",
+      "joinColumn": "studentId"
+    },
+    {
+      "type": "manyToOne",
+      "target": "course",
+      "field": "course",
+      "joinColumn": "courseId"
+    }
+  ]
+}

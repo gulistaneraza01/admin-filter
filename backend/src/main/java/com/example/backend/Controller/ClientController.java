@@ -1,9 +1,6 @@
 package com.example.backend.Controller;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +10,6 @@ import com.example.backend.DTO.CourseRequest;
 import com.example.backend.DTO.EnrollmentRequest;
 import com.example.backend.DTO.PriceRequest;
 import com.example.backend.DTO.StudentRequest;
-import com.example.backend.Model.DatabaseSchema;
 import com.example.backend.Service.ClientService;
 
 import lombok.RequiredArgsConstructor;
@@ -47,11 +43,6 @@ public class ClientController {
     public ResponseEntity<String> addEnrollment(@RequestBody EnrollmentRequest enrollmentRequest) {
         String result = clientService.addEnrollment(enrollmentRequest);
         return ResponseEntity.ok(result);
-    }
-
-    @PostMapping("/json-sql")
-    public List<String> generate(@RequestBody DatabaseSchema schema) {
-        return clientService.convertJsonToSql(schema);
     }
 
 }
